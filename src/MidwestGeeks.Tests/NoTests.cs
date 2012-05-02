@@ -10,14 +10,6 @@ namespace MidwestGeeks.Tests
     [TestFixture]
     public class NoTests
     {
-        [Test]
-        public void EventBriteApiTest()
-        {
-            var angleBracketEvents = new AngleBracketEventRepo();
 
-            var results = angleBracketEvents.ListEvents();
-
-            Assert.IsNotEmpty(results);
-        }
     }
 }

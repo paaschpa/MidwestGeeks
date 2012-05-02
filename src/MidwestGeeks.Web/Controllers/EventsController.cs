@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MidwestGeeks.Lib;
 
 namespace MidwestGeeks.Controllers
 {
@@ -52,6 +53,14 @@ namespace MidwestGeeks.Controllers
                                        };
 
             return Json(new {results = weeklyEvents }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult List()
+        {
+            var repo = new MeetUpRepository();
+            var events = repo.ListEvents();
+
+            return new EmptyResult();
         }
 
     }

@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+@using (Ajax.BeginForm(new AjaxOptions())) 
+{
+    <label>Email address:</label>
+    <!--CHROME AND FIREFOX say a@a is a valid email-->
+    <input type="email" id="email_addr" name="email_addr" required placeholder="email address" 
+    pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" />
+    <br />
+    <label>Meeting Date</label>
+    <input id="meeting_date" type="date" required />
+    <p>&nbsp;</p>
+    <input type="submit" value="Create Event" />
+    
+     <script>
+         $(document).ready(function () {
+             $("#meeting_date").kendoDatepicker({});
+             $("email_addr").email();
+             var validatable = $("#form").kendoValidator().data("kendoValidator");
+             $("#save").click(function () {
+                 if (validatable.validate()) {
+                     save();
+                 }
+             });
+         });
+  </script>
+}

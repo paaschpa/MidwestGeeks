@@ -27,5 +27,10 @@ namespace MidwestGeeks.Controllers
             return Json(new {results = groups}, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
