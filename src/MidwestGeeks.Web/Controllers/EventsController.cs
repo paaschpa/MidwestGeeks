@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MidwestGeeks.Lib;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 
 namespace MidwestGeeks.Controllers
 {
@@ -59,7 +61,6 @@ namespace MidwestGeeks.Controllers
         {
             var repo = new MeetUpRepository();
             var events = repo.ListEvents();
-
             return new EmptyResult();
         }
 
