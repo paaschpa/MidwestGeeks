@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidwestGeeks", "MidwestGeeks\MidwestGeeks.csproj", "{2BFC192E-F3CA-4C56-8C81-ADF75F1CD9F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidwestGeeks.ServiceInterface", "MidwestGeeks.ServiceInterface\MidwestGeeks.ServiceInterface.csproj", "{94C9B243-919E-410F-BA1F-67128367E8FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidwestGeeks.ServiceModel", "MidwestGeeks.ServiceModel\MidwestGeeks.ServiceModel.csproj", "{6EE8EB29-CC94-4BF9-B835-5D2D77F2DFFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{2BFC192E-F3CA-4C56-8C81-ADF75F1CD9F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BFC192E-F3CA-4C56-8C81-ADF75F1CD9F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BFC192E-F3CA-4C56-8C81-ADF75F1CD9F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C9B243-919E-410F-BA1F-67128367E8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C9B243-919E-410F-BA1F-67128367E8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C9B243-919E-410F-BA1F-67128367E8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C9B243-919E-410F-BA1F-67128367E8FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE8EB29-CC94-4BF9-B835-5D2D77F2DFFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE8EB29-CC94-4BF9-B835-5D2D77F2DFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE8EB29-CC94-4BF9-B835-5D2D77F2DFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE8EB29-CC94-4BF9-B835-5D2D77F2DFFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
