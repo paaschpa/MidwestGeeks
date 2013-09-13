@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiRepositories\ApiRepositoryBase.cs" />
     <Compile Include="ApiRepositories\EventBriteRepository.cs" />
     <Compile Include="ApiRepositories\MeetUpRepository.cs" />
     <Compile Include="MeetingsService.cs" />

@@ -7,10 +7,11 @@ using System.IO;
 using System.Configuration;
 using System.Xml.Serialization;
 using System.Globalization;
+using MidwestGeeks.ServiceInterface.ApiRepositories;
 
 namespace MidwestGeeks.Lib
 {
-    public class MeetUpRepository
+    public class MeetUpRepository : ApiRepositoryBase
     {
         private static DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -25,22 +26,14 @@ namespace MidwestGeeks.Lib
             var groups = new[] { senchaGroupId, phpGroupId, chicagoRuby, mchenryCraftsmanship };
             var api_url = @"http://api.meetup.com/2/events?key=" + appKey;
 
-            var events = new List<MeetUpEvent>();
+            return GetEvents<MeetUpEvent>(groups, (group) => api_url + "&group_id=" + group + "&sign=true&page=100&status=upcoming&format=xml");
+        }
 
-            foreach (var groupId in groups)
-            {
-                var request = WebRequest.Create(api_url + "&group_id=" + groupId + "&sign=true&page=100&status=upcoming&format=xml");
-                var response = request.GetResponse();
-
-                using(var stream = response.GetResponseStream())
-                {
-                    var serializer = new XmlSerializer(typeof (MeetupContainer));
-                    var eventCollection = (MeetupContainer) serializer.Deserialize(stream);
-                    events.AddRange(eventCollection.EventCollection.Events);
-                }
-            }
-            //Description, Date, StartTime, Venue
-            return events;
+        protected override IEnumerable<MeetUpEvent> Deserialize<MeetUpEvent>(Stream stream)
+        {
+            var serializer = new XmlSerializer(typeof(MeetupContainer));
+            var eventCollection = (MeetupContainer)serializer.Deserialize(stream);
+            return eventCollection.EventCollection.Events.ToList() as IEnumerable<MeetUpEvent>;
         }
     }
 

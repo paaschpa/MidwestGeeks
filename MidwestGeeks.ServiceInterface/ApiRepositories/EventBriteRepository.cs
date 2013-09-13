@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,11 @@ using System.Net;
 using System.IO;
 using System.Configuration;
 using System.Xml.Serialization;
+using MidwestGeeks.ServiceInterface.ApiRepositories;
 
 namespace MidwestGeeks.Lib
 {
-    public class EventBriteRepository
+    public class EventBriteRepository : ApiRepositoryBase
     {
         //playing with Eventbrite Api
         public IEnumerable<EventBriteEvent> ListEvents()
@@ -21,22 +23,14 @@ namespace MidwestGeeks.Lib
             var api_url = "https://www.eventbrite.com/xml/organizer_list_events?app_key=" + appKey; 
 
             var groupIds = new[] { angleBracketId, lcnugId, altnet };
-            var events = new List<EventBriteEvent>();
+            return GetEvents<EventBriteEvent>(groupIds, (groupId) => { return api_url + "&id=" + groupId; });
+        }
 
-            foreach (var groupId in groupIds)
-            {
-                var request = WebRequest.Create(api_url + "&id=" + groupId);
-                var response = request.GetResponse();
-
-                using (var stream = response.GetResponseStream())
-                {
-                    var serializer = new XmlSerializer(typeof(EventBriteContainer));
-                    var eventCollection = (EventBriteContainer)serializer.Deserialize(stream);
-                    events.AddRange(eventCollection.Events);
-                }
-            }
-
-            return events;
+        protected override IEnumerable<EventBriteEvent> Deserialize<EventBriteEvent>(Stream stream)
+        {
+            var serializer = new XmlSerializer(typeof(EventBriteContainer));
+            var eventCollection = (EventBriteContainer)serializer.Deserialize(stream);
+            return eventCollection.Events.ToList() as IEnumerable<EventBriteEvent>;
         }
     }
 
