@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServiceStack.ServiceHost;
 
 namespace MidwestGeeks.ServiceModel.Types
 {
-    public class Meeting
+    [Route("/UpcomingMeetings")]
+    public class UpcomingMeetings
     {
-        public string Description { get; set; }
-        public string When { get; set; }
-        public string Where { get; set; }
+        public DateTime Today { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using MidwestGeeks.ServiceInterface;
 using ServiceStack.Configuration;
 using ServiceStack.CacheAccess;
 using ServiceStack.CacheAccess.Providers;
@@ -21,7 +22,7 @@ namespace MidwestGeeks.App_Start
 		: AppHostBase
 	{		
 		public AppHost() //Tell ServiceStack the name and where to find your web services
-			: base("MidwestGeeks", typeof(HelloService).Assembly) { }
+			: base("MidwestGeeks", typeof(MeetingsService).Assembly) { }
 
 		public override void Configure(Funq.Container container)
 		{

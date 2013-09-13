@@ -23,19 +23,21 @@ namespace MidwestGeeks.Lib
             var mchenryCraftsmanship = "2857802";
 
             var groups = new[] { senchaGroupId, phpGroupId, chicagoRuby, mchenryCraftsmanship };
-            var api_url = @"http://api.meetup.com/2/events?key=" + appKey + "&group_id=" +
-                String.Join(", ", groups) +
-                "&sign=true&page=100&status=upcoming,past&format=xml";
-
-            var request = WebRequest.Create(api_url);
-            var response = request.GetResponse();
+            var api_url = @"http://api.meetup.com/2/events?key=" + appKey;
 
             var events = new List<MeetUpEvent>();
-            using (var stream = response.GetResponseStream())
+
+            foreach (var groupId in groups)
             {
-                var serializer = new XmlSerializer(typeof(MeetupContainer));
-                var eventCollection = (MeetupContainer)serializer.Deserialize(stream);
-                events.AddRange(eventCollection.EventCollection.Events);
+                var request = WebRequest.Create(api_url + "&group_id=" + groupId + "&sign=true&page=100&status=upcoming&format=xml");
+                var response = request.GetResponse();
+
+                using(var stream = response.GetResponseStream())
+                {
+                    var serializer = new XmlSerializer(typeof (MeetupContainer));
+                    var eventCollection = (MeetupContainer) serializer.Deserialize(stream);
+                    events.AddRange(eventCollection.EventCollection.Events);
+                }
             }
             //Description, Date, StartTime, Venue
             return events;

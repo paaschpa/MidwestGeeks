@@ -16,16 +16,16 @@ namespace MidwestGeeks.Lib
         {
             var appKey = ConfigurationManager.AppSettings["EventBriteApiKey"]; //my eventbrite app key
             var angleBracketId = "1647971612";
-            var lcnugId = "66531483"; //66532490 also
+            var lcnugId = "2353411364"; //66532490 also
             var altnet = "58725219";
-            var api_url = "https://www.eventbrite.com/xml/organizer_list_events?app_key=" + appKey + "&id=" + lcnugId;
+            var api_url = "https://www.eventbrite.com/xml/organizer_list_events?app_key=" + appKey; 
 
             var groupIds = new[] { angleBracketId, lcnugId, altnet };
             var events = new List<EventBriteEvent>();
 
             foreach (var groupId in groupIds)
             {
-                var request = WebRequest.Create(api_url);
+                var request = WebRequest.Create(api_url + "&id=" + groupId);
                 var response = request.GetResponse();
 
                 using (var stream = response.GetResponseStream())
@@ -60,7 +60,7 @@ namespace MidwestGeeks.Lib
         public string Description { get; set; }
 
         [XmlElement("start_date")]
-        public String When { get; set; }
+        public string When { get; set; }
 
         [XmlElement("timezone")]
         public String TimeZone { get; set; }
@@ -70,13 +70,21 @@ namespace MidwestGeeks.Lib
 
         [XmlElement("organizer")]
         public Organizer Organizer { get; set; }
+
+        public DateTime When2 { get
+        {
+            DateTime when;
+            DateTime.TryParse(When.Substring(0, When.IndexOf(" ")), out when);
+            return when;
+        } }
+ 
     }
 
     [Serializable]
     public class EventBriteVenue
     {
         [XmlElement("id")]
-        public int ID { get; set; }
+        public long ID { get; set; }
 
         [XmlElement("name")]
         public string Name { get; set; }
@@ -95,7 +103,7 @@ namespace MidwestGeeks.Lib
     public class Organizer
     {
         [XmlElement("id")]
-        public int ID { get; set; }
+        public long ID { get; set; }
 
         [XmlElement("name")]
         public string Name { get; set; }
