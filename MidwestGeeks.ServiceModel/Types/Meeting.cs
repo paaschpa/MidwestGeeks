@@ -8,8 +8,11 @@ namespace MidwestGeeks.ServiceModel.Types
 {
     public class Meeting
     {
+        public string Name { get; set; }
         public string Description { get; set; }
-        public string When { get; set; }
+        public DateTime Day { get; set; }
+        public string Time { get; set; }
         public string Where { get; set; }
+        public string Source { get; set; }
     }
 }

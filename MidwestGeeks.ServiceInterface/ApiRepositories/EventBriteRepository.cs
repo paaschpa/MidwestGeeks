@@ -65,12 +65,15 @@ namespace MidwestGeeks.Lib
         [XmlElement("organizer")]
         public Organizer Organizer { get; set; }
 
-        public DateTime When2 { get
+        public DateTime Date { get
         {
             DateTime when;
-            DateTime.TryParse(When.Substring(0, When.IndexOf(" ")), out when);
+            //DateTime.TryParse(When.Substring(0, When.IndexOf(" ")), out when);
+            DateTime.TryParse(When.Replace(" ", " T"), out when);
             return when;
         } }
+
+        public string Time { get { return Date.Hour + ":" + Date.Minute + " " + TimeZone; } }
  
     }
 

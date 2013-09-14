@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,24 +17,30 @@ namespace MidwestGeeks.ServiceInterface
             var upcomingMeetings = new List<Meeting>();
             var meetups = new MeetUpRepository().ListEvents()
                 .Select(x => new Meeting {
+                    Name = x.Group.Name,
                     Description = x.Description, 
-                    When = x.Date + " " + x.Time, 
-                    Where = x.Venue != null ? x.Venue.Name : "UnKnown"
+                    Day = x.Date, 
+                    Time = x.Time,
+                    Where = x.Venue != null ? x.Venue.Name : "UnKnown",
+                    Source = "MeetUp"
                 });
 
             var eventbrites = new EventBriteRepository().ListEvents()
-                .Where(x => x.When2 >= DateTime.Today.AddDays(-1))
+                .Where(x => x.Date >= DateTime.Today.AddDays(-1))
                 .Select(x => new Meeting()
                     {
+                       Name = x.Title,
                        Description = x.Description,
-                       When = x.When.ToString(),
-                       Where = x.Venue != null ? x.Venue.Name : "UnKnown"
+                       Day = x.Date,
+                       Time = x.Date.ToString("t", CultureInfo.CreateSpecificCulture("en-us")),
+                       Where = x.Venue != null ? x.Venue.Name : "UnKnown",
+                       Source = "EventBrite"
                     });
 
             upcomingMeetings.AddRange(meetups);
             upcomingMeetings.AddRange(eventbrites);
 
-            return upcomingMeetings;
+            return upcomingMeetings.OrderBy(x => x.Day).ToList();
         }
     }
 }

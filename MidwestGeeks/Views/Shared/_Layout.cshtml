@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+    </head>
+    <body>
+        <link href="../../Content/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Midwest Geeks!</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class='@(Request.RawUrl.EndsWith("Home") ? "active" : "")'><a href="/Home">Home</a></li>
+                        <li class='@(Request.RawUrl.EndsWith("About") ? "active" : "")'><a href="/Home/About">About</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">Sign in</button>
+                    </form>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </div>        
+        
+        <div class="container">
+            @RenderBody()
+        </div>    
+        <script src="../../Content/js/jquery.min.js"></script>
+        <script src="../../Content/js/bootstrap.min.js"></script>
+        <script src="../../Content/js/angular.min.js"></script>
+
+        @RenderSection("Scripts",false)
+    </body>
+</html>

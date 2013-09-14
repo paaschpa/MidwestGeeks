@@ -64,12 +64,12 @@ namespace MidwestGeeks.Lib
         [XmlElement("utc_offset")]
         public string TimeOffSet { get; set; }
 
-        public string Date
+        public DateTime Date
         {
             get
             {
                 var dbl = double.Parse(this.When, CultureInfo.InvariantCulture);
-                return Epoch.AddMilliseconds(dbl).ToString();
+                return DateTime.Parse(Epoch.AddMilliseconds(dbl).ToString());
             }
         }
         public string Time
@@ -78,7 +78,7 @@ namespace MidwestGeeks.Lib
             {
                 var dbl = double.Parse(this.When, CultureInfo.InvariantCulture);
                 var dt = Epoch.AddMilliseconds(dbl);
-                return dt.AddMilliseconds(double.Parse(this.TimeOffSet, CultureInfo.InvariantCulture)).TimeOfDay.ToString();
+                return dt.AddMilliseconds(double.Parse(this.TimeOffSet, CultureInfo.InvariantCulture)).ToString("t", CultureInfo.CreateSpecificCulture("en-us"));
             }
         }
         [XmlElement("venue")]
