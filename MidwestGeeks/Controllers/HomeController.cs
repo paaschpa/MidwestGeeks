@@ -17,5 +17,10 @@ namespace MidwestGeeks.Controllers
         {
             return View();
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }

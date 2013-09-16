@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using MidwestGeeks.ServiceInterface;
 using MidwestGeeks.ServiceInterface.Validators;
+using ServiceStack.Authentication.OpenId;
 using ServiceStack.Configuration;
 using ServiceStack.CacheAccess;
 using ServiceStack.CacheAccess.Providers;
@@ -32,13 +33,29 @@ namespace MidwestGeeks.App_Start
 			//Set JSON web services to return idiomatic JSON camelCase properties
 			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
 
-		    container.Register<ICacheClient>(new MemoryCacheClient());
+		    container.Register<ICacheClient>(new BasicRedisClientManager());
 		    container.Register<IDbConnectionFactory>(
                 new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["Db"].ToString(), SqlServerDialect.Provider));
 
             Plugins.Add(new ValidationFeature());
             container.RegisterValidators(typeof(MeetingValidator).Assembly);
-			
+
+            //https://github.com/ServiceStack/ServiceStack/wiki/Authentication-and-authorization#userauth-persistence---the-iuserauthrepository
+            //Use ServiceStacks authentication/authorization persistence
+            
+            var userRep = new OrmLiteAuthRepository(container.Resolve<IDbConnectionFactory>());
+            container.Register<IUserAuthRepository>(userRep);
+            userRep.CreateMissingTables(); //Create missing Auth
+
+            var appSettings = new AppSettings();
+            Plugins.Add(new AuthFeature(() => new AuthUserSession(), new IAuthProvider[]
+                {
+                    new CredentialsAuthProvider(),
+                    new GoogleOpenIdOAuthProvider(appSettings), 
+                }));
+
+            Plugins.Add(new RegistrationFeature());
+
             //Set MVC to use the same Funq IOC as ServiceStack
 			ControllerBuilder.Current.SetControllerFactory(new FunqControllerFactory(container));
 		}
