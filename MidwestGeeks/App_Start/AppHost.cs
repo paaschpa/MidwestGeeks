@@ -33,7 +33,7 @@ namespace MidwestGeeks.App_Start
 			//Set JSON web services to return idiomatic JSON camelCase properties
 			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
 
-		    container.Register<ICacheClient>(new BasicRedisClientManager());
+		    container.Register<ICacheClient>(new MemoryCacheClient());
 		    container.Register<IDbConnectionFactory>(
                 new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["Db"].ToString(), SqlServerDialect.Provider));
 

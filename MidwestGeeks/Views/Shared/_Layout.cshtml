@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using MidwestGeeks.App_Start
+@using ServiceStack.CacheAccess
+@using ServiceStack.ServiceInterface
+@using ServiceStack.ServiceInterface.Auth
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -7,7 +11,7 @@
     </head>
     <body>
         <link href="../../Content/css/bootstrap.min.css" rel="stylesheet"/>
-
+        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -22,14 +26,26 @@
                     <ul class="nav navbar-nav">
                         <li class='@(Request.RawUrl.EndsWith("Home") ? "active" : "")'><a href="/Home">Home</a></li>
                         <li class='@(Request.RawUrl.EndsWith("About") ? "active" : "")'><a href="/Home/About">About</a></li>
-                        <li>
-                            <div class="control-group">
+                    </ul>
+                    @{
+                        //TODO:hmmm, might be missing a better way to do this...
+                        var key = SessionFeature.GetSessionKey() ?? "";
+                        var sess = AppHost.Resolve<ICacheClient>().Get<AuthUserSession>(key);
+                        if (sess != null && sess.IsAuthenticated)
+                        {
+                            <div style="float:right;margin-top:10px" class="navbar-link">
+                                Welcome @sess.PrimaryEmail
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="signIn" class="control-group" style="margin-top:10px;float:right">
                                 <form class="controls" action="@Url.Content("~/api/auth/googleopenid")" method="POST">
                                     <input type="image" src="@Url.Content("~/Content/images/sign-in-with-google.png")" alt="Sign in with Google">
                                 </form>
-                            </div> 
-                        </li>
-                    </ul>
+                            </div>
+                        }
+                    }
                 </div><!--/.navbar-collapse -->
             </div>
         </div>        
@@ -38,8 +54,10 @@
             @RenderBody()
         </div>    
         <script src="../../Content/js/jquery.min.js"></script>
-        <script src="../../Content/js/bootstrap.min.js"></script>
+        <script src="../../Content/js/jquery-ui.min.js"></script>
         <script src="../../Content/js/angular.min.js"></script>
+        <script src="../../Content/js/angular-ui.min.js"></script>
+        <script src="../../Content/js/bootstrap.min.js"></script>
 
         @RenderSection("Scripts",false)
     </body>
