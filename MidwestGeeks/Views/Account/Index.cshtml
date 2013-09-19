@@ -2,6 +2,12 @@
     ViewBag.Title = "Index";
 }
 Create An Event
+<style>
+   .ui-datepicker {
+       font-size: 10pt;
+   } 
+</style>
+
 <div ng-app="accountModule">
     <div ng-controller="accountCtrl">
         <form class="form-horizontal" role="form">
@@ -17,9 +23,20 @@ Create An Event
                     <input type="text" class="form-control" id="description">
                 </div>
             </div>
-            <div class="control-group input-append">
-                <input ui-date name="when"></input>
+            <div class="form-group">
+                <label for="when" class="col-lg-2 control-label">When</label>
+                <div class="col-lg-10">
+                    <!--<input ui-date name="when"></input>-->
+                </div>
             </div>
+            <div class="form-group">
+                <label for="time" class="col-lg-2 control-label">Time</label>
+                <div class="col-lg-10">
+                    <div ng-model="mytime" ng-change="changed()" class="well well-small" style="display:inline-block;">
+                        <timepicker hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                    </div>
+                </div>
+            </div> 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                     <button type="submit" class="btn btn-default">Create</button>
@@ -27,7 +44,7 @@ Create An Event
             </div>
         </form>
     </div>
-</div>
 @section Scripts {
     <script src="../../Content/js/app/account.js"></script>
 }
+</div>

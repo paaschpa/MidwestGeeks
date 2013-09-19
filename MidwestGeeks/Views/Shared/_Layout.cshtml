@@ -8,11 +8,14 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>@ViewBag.Title</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <link href="../../Content/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <!--<link href="../../Content/css/bootstrap.css" rel="stylesheet"/>
+        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />-->
+        <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,15 +52,15 @@
                 </div><!--/.navbar-collapse -->
             </div>
         </div>        
-        
         <div class="container">
-            @RenderBody()
+                @RenderBody()
         </div>    
-        <script src="../../Content/js/jquery.min.js"></script>
-        <script src="../../Content/js/jquery-ui.min.js"></script>
+        <!--<script src="../../Content/js/jquery.min.js"></script>
+        <!--<script src="../../Content/js/jquery-ui.min.js"></script>
         <script src="../../Content/js/angular.min.js"></script>
+        <script src="../../Content/js/ui-bootstrap-tpls.js"></script>
         <script src="../../Content/js/angular-ui.min.js"></script>
-        <script src="../../Content/js/bootstrap.min.js"></script>
+        <script src="../../Content/js/bootstrap.min.js"></script>-->
 
         @RenderSection("Scripts",false)
     </body>

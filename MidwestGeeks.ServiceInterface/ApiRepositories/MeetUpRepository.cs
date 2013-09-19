@@ -33,7 +33,10 @@ namespace MidwestGeeks.Lib
         {
             var serializer = new XmlSerializer(typeof(MeetupContainer));
             var eventCollection = (MeetupContainer)serializer.Deserialize(stream);
-            return eventCollection.EventCollection.Events.ToList() as IEnumerable<MeetUpEvent>;
+            if (eventCollection.EventCollection.Events != null)
+                return eventCollection.EventCollection.Events.ToList() as IEnumerable<MeetUpEvent>;
+
+            return new List<MeetUpEvent>();
         }
     }
 
