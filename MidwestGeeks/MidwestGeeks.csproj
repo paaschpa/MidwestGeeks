@@ -157,8 +157,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="Content\css\bootstrap-theme.css" />
-    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap-2.3.2.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\images\sign-in-with-google.png" />
@@ -167,13 +166,9 @@
     <Content Include="Content\js\app\account.js" />
     <Content Include="Content\js\app\homeModule.js" />
     <Content Include="Content\js\app\Register.js" />
-    <Content Include="Content\js\bootstrap.js" />
-    <Content Include="Content\js\bootstrap.min.js" />
-    <Content Include="Content\js\jquery-ui.min.js" />
-    <Content Include="Content\js\jquery.js" />
-    <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\ss-validation.js" />
-    <Content Include="Content\js\ui-bootstrap-tpls.js" />
+    <Content Include="Content\js\ui-bootstrap-0.6.0.js" />
+    <Content Include="Content\js\ui-bootstrap-tpls-0.6.0.js" />
     <Content Include="Global.asax" />
     <Content Include="README.txt" />
     <Content Include="Web.config">
@@ -223,9 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\js\angular-ui.min.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
