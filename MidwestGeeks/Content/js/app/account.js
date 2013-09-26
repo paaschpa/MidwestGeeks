@@ -2,7 +2,8 @@
 var accountModule = angular.module('accountModule', ['ui.bootstrap']);
 
 accountModule.controller('accountCtrl', ['$scope', '$http', 'dateFilter', function ($scope, $http, dateFilter) {
-    $scope.mytime = new Date();
+    $scope.meetingTime = new Date();
+    $("#timeWrapper").hide();
 
     $scope.hstep = 1;
     $scope.mstep = 15;
@@ -21,14 +22,14 @@ accountModule.controller('accountCtrl', ['$scope', '$http', 'dateFilter', functi
         var d = new Date();
         d.setHours(14);
         d.setMinutes(0);
-        $scope.mytime = d;
-    };
-
-    $scope.changed = function () {
-        console.log('Time changed to: ' + $scope.mytime);
+        $scope.meetingTime = d;
     };
 
     $scope.clear = function () {
         $scope.mytime = null;
     };
+
+    $scope.showTime = function () {
+        $('#timeWrapper').show();
+    }
 }]);

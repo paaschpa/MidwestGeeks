@@ -166,6 +166,7 @@
     <Content Include="Content\js\app\account.js" />
     <Content Include="Content\js\app\homeModule.js" />
     <Content Include="Content\js\app\Register.js" />
+    <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\ss-validation.js" />
     <Content Include="Content\js\ui-bootstrap-0.6.0.js" />
     <Content Include="Content\js\ui-bootstrap-tpls-0.6.0.js" />

@@ -11,50 +11,52 @@
         <link href="../../Content/css/bootstrap-2.3.2.min.css" rel="stylesheet">
     </head>
     <body>
-        <!--<link href="../../Content/css/bootstrap.css" rel="stylesheet"/>
-        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />-->
-        <div class="navbar navbar-inverse">
+        <div class="navbar-wrapper">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Midwest Geeks!</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class='@(Request.RawUrl.EndsWith("Home") ? "active" : "")'><a href="/Home">Home</a></li>
-                        <li class='@(Request.RawUrl.EndsWith("About") ? "active" : "")'><a href="/Home/About">About</a></li>
-                    </ul>
-                    @{
-                        //TODO:hmmm, might be missing a better way to do this...
-                        var key = SessionFeature.GetSessionKey() ?? "";
-                        var sess = AppHost.Resolve<ICacheClient>().Get<AuthUserSession>(key);
-                        if (sess != null && sess.IsAuthenticated)
-                        {
-                            <div style="float:right;margin-top:10px" class="navbar-link">
-                                Welcome @sess.PrimaryEmail
-                            </div>
-                        }
-                        else
-                        {
-                            <div id="signIn" class="control-group" style="margin-top:10px;float:right">
-                                <form class="controls" action="@Url.Content("~/api/auth/googleopenid")" method="POST">
-                                    <input type="image" src="@Url.Content("~/Content/images/sign-in-with-google.png")" alt="Sign in with Google">
-                                </form>
-                            </div>
-                        }
-                    }
-                </div><!--/.navbar-collapse -->
-            </div>
-        </div>        
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="brand" href="#">Midwest Geeks!</a>
+                        <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class='@(Request.RawUrl.EndsWith("Home") ? "active" : "")'><a href="/Home">Home</a></li>
+                            <li class='@(Request.RawUrl.EndsWith("About") ? "active" : "")'><a href="/Home/About">About</a></li>
+                        </ul>
+                            @{
+                                //TODO:hmmm, might be missing a better way to do this...
+                                var key = SessionFeature.GetSessionKey() ?? "";
+                                var sess = AppHost.Resolve<ICacheClient>().Get<AuthUserSession>(key);
+                                if (sess != null && sess.IsAuthenticated)
+                                {
+                                    <div style="float:right;margin-top:10px" class="navbar-link">
+                                        Welcome @sess.PrimaryEmail
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div id="signIn" class="control-group" style="margin-top:10px;float:right">
+                                        <form class="controls" action="@Url.Content("~/api/auth/googleopenid")" method="POST">
+                                            <input type="image" src="@Url.Content("~/Content/images/sign-in-with-google.png")" alt="Sign in with Google">
+                                        </form>
+                                    </div>
+                                }
+                            }
+                        </div><!--/.nav-collapse -->
+                    </div><!-- /.navbar-inner -->
+                </div><!-- /.navbar -->
+
+            </div> <!-- /.container -->
+        </div><!-- /.navbar-wrapper -->
         <div class="container">
                 @RenderBody()
         </div>    
-        <!--<script src="../../Content/js/jquery.min.js"></script>
-        <script src="../../Content/js/jquery-ui.min.js"></script>-->
+        <script src="../../Content/js/jquery.min.js"></script>
+        <!--<script src="../../Content/js/jquery-ui.min.js"></script>-->
         <script src="../../Content/js/angular.min.js"></script>
         <script src="../../Content/js/ui-bootstrap-tpls-0.6.0.js"></script>
         <!--<script src="../../Content/js/ui-bootstrap-tpls.js"></script> -->
